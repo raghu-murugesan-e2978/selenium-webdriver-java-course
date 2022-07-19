@@ -3,10 +3,9 @@ name: on_push
 on:
   push:
     branch:
-      - "**" # This will run on all branches, and must be quoted to be handled by yaml
+      - '**' # This will run on all branches, and must be quoted to be handled by yaml
 
 jobs:
-
   build_and_test:
     runs-on: ubuntu-latest
 
@@ -15,6 +14,8 @@ jobs:
       HEADLESS_CHROME: true
 
     steps:
+      - name: Set start time
+        run: echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
         with:
@@ -23,3 +24,11 @@ jobs:
       - name: Run tests with maven
         working-directory: webdriver_java
         run: mvn test
+      - name: Collect build data
+        working-directory: webdriver_java
+        env:
+          PUSHGATEWAY_URL: ${{ secrets.PUSHGATEWAY_URL }}
+        if: always()
+        run: |
+          echo "github_actions_total_duration $(expr $(date +%s) - ${START_TIME})" | curl --data-binary @- ${PUSHGATEWAY_URL}/metrics/job/github_actions
+          ./resources/test_result_script.sh
