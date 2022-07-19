@@ -5,7 +5,10 @@ This is a fork of the fantastic [free Selenium WebDriver for Java tutorial](http
 This fork acts as the course material for an upcoming course on observability for test automators.
 
 We will cover intermediate to advanced topics in monitoring and observability including:
-* Creating a basic build pipeline in GitHub Actions
-* Generating metrics via bash commands
-* Running metrics infrastructure locally via docker-compose
-* Generating json events from a build pipeline
+
+- Creating a basic build pipeline in GitHub Actions
+- Generating metrics via bash commands
+- Running metrics infrastructure locally via docker-compose
+- Generating json events from a build pipeline
+
+# Free Observability for Test Automators Tutorial
