@@ -21,7 +21,7 @@ public class AlertTests extends BaseTests {
         alertsPage.triggerConfirm();
         String text = alertsPage.alert_getText();
         alertsPage.alert_clickToDismiss();
-        assertEquals(text, "I am a JS Confirm", "Alert text incorrect");
+        assertEquals(text, "I am a JS Confirm 1", "Alert text incorrect");
     }
 
     @Test
